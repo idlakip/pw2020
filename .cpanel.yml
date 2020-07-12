@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=home/mql5.masrianto.com/test/
+    - export DEPLOYPATH=/home/mql5.masrianto.com/public_html/
     - /bin/cp -R * $DEPLOYPATH
