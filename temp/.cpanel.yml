@@ -3,3 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home3/pw043040023/public_html/
     - /bin/cp -R * $DEPLOYPATH
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/cpanelUser/public_html/
+    - /bin/cp -R * $DEPLOYPATH
