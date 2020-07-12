@@ -2,7 +2,7 @@
 
 function koneksi()
 {
-  return mysqli_connect('localhost', 'root', 'root', 'cb_016122333');
+  return mysqli_connect('localhost', 'root', '', 'cb_016122333');
 }
 
 function query($query)
