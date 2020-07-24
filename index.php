@@ -22,17 +22,37 @@ if (isset($_POST['cari'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daftar Mahasiswa</title>
+  <style>
+    .loader {
+      width: 100px;
+      position: absolute;
+      top: 118px;
+      left: 210px;
+      z-index: -1;
+      display: none;
+    }
+
+    @media print {
+
+      .logout,
+      .tambah,
+      .form-cari,
+      .aksi {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <a href="logout.php">Logout</a>
+  <a href="logout.php">Logout</a> | <a href="cetak.php" target="_blank">Cetak</a>
   <h3>Daftar Mahasiswa</h3>
 
-  <a href="tambah.php">Tambah Data Mahasiswa</a>
+  <a href="tambah.php" class="tambah">Tambah data mahasiswa</a>
   <br><br>
 
-  <form action="" method="POST">
-    <input type="text" name="keyword" size="40" placeholder="masukkan keyword pencarian.." autocomplete="off" autofocus class="keyword">
+  <form action="" method="POST" class="form-cari">
+    <input type="text" name="keyword" size="40" placeholder="masukkan keyword pencarian.." autocomplete="off" autofocus class="keyword" id="keyword">
     <button type="submit" name="cari" class="tombol-cari">Cari!</button>
   </form>
   <br>
@@ -43,13 +63,13 @@ if (isset($_POST['cari'])) {
         <th>#</th>
         <th>Gambar</th>
         <th>Nama</th>
-        <th>Aksi</th>
+        <th class="aksi">Detail</th>
       </tr>
 
       <?php if (empty($mahasiswa)) : ?>
         <tr>
           <td colspan="4">
-            <p style="color: red; font-style: italic;">data mahasiswa tidak ditemukan!</p>
+            <p style="color: red; font-style: italic;">data yang dicari tidak ditemukan!</p>
           </td>
         </tr>
       <?php endif; ?>
