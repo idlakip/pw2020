@@ -1,8 +1,9 @@
 <?php
 require_once 'vendor/autoload.php';
 
+require 'functions.php';
 // Creating the new document...
-// $phpWord = new \PhpOffice\PhpWord\PhpWord();
+$phpWord = new \PhpOffice\PhpWord\PhpWord();
 
 /* Note: any element you append to a document must reside inside of a Section. */
 
@@ -10,13 +11,13 @@ require_once 'vendor/autoload.php';
 
 // teks 1
 // Adding an empty Section to the document...
-// $section = $phpWord->addSection();
-// // Adding Text element to the Section having font styled by default...
-// $section->addText(
-//   '"Learn from yesterday, live for today, hope for tomorrow. '
-//     . 'The important thing is not to stop questioning." '
-//     . '(Albert Einstein)'
-// );
+$section = $phpWord->addSection();
+// Adding Text element to the Section having font styled by default...
+$section->addText(
+  '"Learn from yesterday, live for today, hope for tomorrow. '
+    . 'The important thing is not to stop questioning." '
+    . '(Albert Einstein)'
+);
 
 // /*
 //  * Note: it's possible to customize font style of the Text element you add in three ways:
@@ -53,13 +54,13 @@ require_once 'vendor/autoload.php';
 
 
 // teks 4
-// // Adding Text element with font customized using explicitly created font style object...
-// $fontStyle = new \PhpOffice\PhpWord\Style\Font();
-// $fontStyle->setBold(true);
-// $fontStyle->setName('Tahoma');
-// $fontStyle->setSize(13);
-// $myTextElement = $section->addText('"Believe you can and you\'re halfway there." (Theodor Roosevelt)');
-// $myTextElement->setFontStyle($fontStyle);
+// Adding Text element with font customized using explicitly created font style object...
+$fontStyle = new \PhpOffice\PhpWord\Style\Font();
+$fontStyle->setBold(true);
+$fontStyle->setName('Tahoma');
+$fontStyle->setSize(13);
+$myTextElement = $section->addText('"Masri you can and you\'re halfway there." (Theodor Roosevelt)');
+$myTextElement->setFontStyle($fontStyle);
 
 
 
@@ -89,9 +90,9 @@ require_once 'vendor/autoload.php';
 
 // $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-// // New portrait section
-// $section = $phpWord->addSection();
-// $textRun = $section->addTextRun();
+// New portrait section
+$section = $phpWord->addSection();
+$textRun = $section->addTextRun();
 
 // $text = $textRun->addText('Hello World! Time to ');
 
@@ -123,35 +124,35 @@ require_once 'vendor/autoload.php';
 // $xmlWriter->save("php://output");
 
 
-$objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-$phpWord = $objReader->load("helloWorld.doc");
+// $objReader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
+// $phpWord = $objReader->load("kwitansi.docx");
 
-// $rendedererName = \PhpOffice\PhpWord\Settings::PDF_RENDERER_DOMPDF;
-// $rendedererName = \PhpOffice\PhpWord\Settings::PDF_RENDERER_MPDF;
-$rendedererName = \PhpOffice\PhpWord\Settings::PDF_RENDERER_TCPDF;
-$rendedererLibrary = 'mpdf'; // 'tcpdf'
-$rendedererLibraryPath = '' . $rendedererLibrary;
-if (!\PhpOffice\PhpWord\Settings::setPdfRenderer(
-  $rendedererName,
-  $rendedererLibraryPath
-)) {
-  die('NOTICE: Please set the $rendedererName and $rendedererLibraryPath values' .
-    '<br />' .
-    'at the top of this script as appropriate for your directory structur');
-}
-$rendedererLibraryPath = '' . $rendedererLibrary;
+// // $rendererName = \PhpOffice\PhpWord\Settings::PDF_RENDERER_DOMPDF;
+// // $rendererName = \PhpOffice\PhpWord\Settings::PDF_RENDERER_MPDF;
+// $rendererName = \PhpOffice\PhpWord\Settings::PDF_RENDERER_TCPDF;
+// $rendererLibrary = 'tcpdf'; // 'mpdf'
+// $rendererLibraryPath = '' . $rendererLibrary;
+// if (!\PhpOffice\PhpWord\Settings::setPdfRenderer(
+//   $rendererName,
+//   $rendererLibraryPath
+// )) {
+//   die('NOTICE: Please set the $rendererName and $rendererLibraryPath values' .
+//     '<br />' .
+//     'at the top of this script as appropriate for your directory structur');
+// }
+// $rendererLibraryPath = '' . $rendererLibrary;
 
 
 
 
 
 // Saving the document as OOXML file...
-$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'PDF');
-$objWriter->save('kwitansi.pdf');
+// $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'PDF');
+// $objWriter->save('kwitansi.pdf');
 
 
-// $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-// $objWriter->save('kwitansi.docx');
+$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+$objWriter->save('kwitansi.docx');
 
 // Saving the document as ODF file...
 // $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'ODText');
