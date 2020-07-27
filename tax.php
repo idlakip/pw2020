@@ -1,31 +1,16 @@
 <?php
-// PROTEKSI
-// $protection = $spreadsheet->getActiveSheet()->getProtection();
-// $allowed = $protection->verify('my password');
-
-// if ($allowed) {
-//   doSomething();
-// } else {
-//   throw new Exception('Incorrect password');
-// }
-// // PROTEKSI ALGORITHM_SHA_512
-// $protection = $spreadsheet->getActiveSheet()->getProtection();
-// $protection->setAlgorithm(Protection::ALGORITHM_SHA_512);
-// $protection->setSpinCount(20000);
-// $protection->setPassword('PhpSpreadsheet');
-
 //Menggabungkan dengan file koneksi yang telah kita buat
 require 'functions.php';
 
 // Load library phpspreadsheet
 require 'vendor/autoload.php';
 
-use PhpOffice\PhpSpreadsheet\Helper\Sample;
-use PhpOffice\PhpSpreadsheet\Reader\IReader;
-use PhpOffice\PhpSpreadsheet\Writer\IWriter;
+// use PhpOffice\PhpSpreadsheet\Helper\Sample;
+// use PhpOffice\PhpSpreadsheet\Reader\IReader;
+// use PhpOffice\PhpSpreadsheet\Writer\IWriter;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+// use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 $spreadsheet = new Spreadsheet();
@@ -62,7 +47,7 @@ $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
 // $spreadsheet->getActiveSheet()->getColumnDimension('D')->setVisible(true);
 // $spreadsheet->getActiveSheet()->getColumnDimension('E')->setVisible(false);
 
-// SET ROH HEIGHT
+// SET ROW HEIGHT
 // $spreadsheet->getActiveSheet()->getRowDimension('10')->setRowHeight(100); //ROW No. 10
 
 // Show/hide a row
@@ -75,7 +60,6 @@ $spreadsheet->getActiveSheet()->setCellValue('A3', '');
 $spreadsheet->getActiveSheet()->setCellValue('A4', '');
 $spreadsheet->getActiveSheet()->setCellValue('A7', '');
 $spreadsheet->getActiveSheet()->setCellValue('A8', '');
-
 
 $spreadsheet->getActiveSheet()->mergeCells('C1:F1');
 $spreadsheet->getActiveSheet()->setCellValue('C1', 'LEMBAGA ADMINISTRASI KEUANGAN DAN ILMU PEMERINTAHAN');
@@ -112,17 +96,17 @@ $spreadsheet->addNamedRange(new \PhpOffice\PhpSpreadsheet\NamedRange('No', $spre
 $spreadsheet->getActiveSheet()->getProtection()->setSheet(true);
 
 // PROTEKSI DOCUMENT
-// $security = $spreadsheet->getSecurity();
-// $security->setLockWindows(true);
-// $security->setLockStructure(true);
-// $security->setWorkbookPassword("PhpSpreadsheet");
+$security = $spreadsheet->getSecurity();
+$security->setLockWindows(true);
+$security->setLockStructure(true);
+$security->setWorkbookPassword("PhpSpreadsheet");
 // PROTEKSI DOCUMENT
-// $protection = $spreadsheet->getActiveSheet()->getProtection();
-// $protection->setPassword('PhpSpreadsheet');
-// $protection->setSheet(true);
-// $protection->setSort(true);
-// $protection->setInsertRows(true);
-// $protection->setFormatCells(true);
+$protection = $spreadsheet->getActiveSheet()->getProtection();
+$protection->setPassword('PhpSpreadsheet');
+$protection->setSheet(true);
+$protection->setSort(true);
+$protection->setInsertRows(true);
+$protection->setFormatCells(true);
 // // UNPROTEKSI CELL
 // $spreadsheet->getActiveSheet()->getStyle('A7')
 //   ->getProtection()
@@ -135,11 +119,7 @@ $drawing->setPath('img/lakip.png'); //ok
 $drawing->setCoordinates('B1'); //ok
 $drawing->setHeight(85); //ok
 $drawing->setOffsetX(5); //ok
-// $drawing->setRotation(25); 
-// $drawing->getShadow()->setVisible(false);
-// $drawing->getShadow()->setDirection(45);
 $drawing->setWorksheet($spreadsheet->getActiveSheet('A1')); //ok
-
 
 //Font Color
 $spreadsheet->getActiveSheet()->getStyle('A10:F10')
@@ -151,21 +131,6 @@ $spreadsheet->getActiveSheet()->getStyle('A10:F10')->getFill()
 // Default width dan row
 $spreadsheet->getActiveSheet()->getDefaultColumnDimension()->setWidth(12);
 $spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15);
-
-// Generate an image
-// $gdImage = @imagecreatetruecolor(120, 20) or die('Cannot Initialize new GD image stream');
-// $textColor = imagecolorallocate($gdImage, 255, 255, 255);
-// imagestring($gdImage, 1, 5, 5,  'Created with PhpSpreadsheet', $textColor);
-
-// Add a drawing to the worksheet
-// $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing();
-// $drawing->setName('Sample image');
-// $drawing->setDescription('Sample image');
-// $drawing->setImageResource($gdImage);
-// $drawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_JPEG);
-// $drawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
-// $drawing->setHeight(36);
-// $drawing->setWorksheet($spreadsheet->getActiveSheet());
 
 $spreadsheet->getActiveSheet()->getSheetView()->setZoomScale(75);
 $worksheet1 = $spreadsheet->createSheet();
@@ -247,7 +212,9 @@ $spreadsheet->getActiveSheet()->setAutoFilter('A10:F10'); //OK
 // SET REPEAT 
 $spreadsheet->getActiveSheet()->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 5);
 // SET PRINT AREA
-$spreadsheet->getActiveSheet()->getPageSetup()->setPrintArea('A1:F28');
+$spreadsheet->getActiveSheet()->getPageSetup()->setPrintArea('A1:F30');
+
+// $spreadsheet->getActiveSheet()->getPageSetup()->setPrintArea('A1:F15,A18:F30'); // TERPISAH 2 LEMBAR
 // BREAK ROW
 // $spreadsheet->getActiveSheet()->setBreak('A20', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_ROW); //OK
 
@@ -258,7 +225,8 @@ $spreadsheet->getActiveSheet()->setShowGridlines(true);
 // TTD
 $spreadsheet->getActiveSheet()->setCellValue('E18', '');
 $spreadsheet->getActiveSheet()->setCellValue('E19', '');
-$spreadsheet->getActiveSheet()->setCellValue('A25', '');
+$spreadsheet->getActiveSheet()->setCellValue('E20', '');
+$spreadsheet->getActiveSheet()->setCellValue('A24', '');
 $spreadsheet->getActiveSheet()->setCellValue('A25', '');
 
 
@@ -282,25 +250,23 @@ $spreadsheet->getActiveSheet()->getStyle('E20:F20')
 $spreadsheet->getActiveSheet()->setCellValue('E20', 'dan Ilmu Pemerintahan');
 $spreadsheet->addNamedRange(new \PhpOffice\PhpSpreadsheet\NamedRange('instansi2', $spreadsheet->getActiveSheet(), 'E20'));
 
-
-
-$spreadsheet->getActiveSheet()->mergeCells('E23:F23');
-$spreadsheet->getActiveSheet()->setCellValue('E23', 'MASRIANTO');
-$spreadsheet->addNamedRange(new \PhpOffice\PhpSpreadsheet\NamedRange('penerima', $spreadsheet->getActiveSheet(), 'E23'));
-
 $spreadsheet->getActiveSheet()->mergeCells('E24:F24');
-$spreadsheet->getActiveSheet()->setCellValue('E24', 'Bendahara');
-$spreadsheet->addNamedRange(new \PhpOffice\PhpSpreadsheet\NamedRange('jabatan', $spreadsheet->getActiveSheet(), 'E24'));
+$spreadsheet->getActiveSheet()->setCellValue('E24', 'MASRIANTO');
+$spreadsheet->addNamedRange(new \PhpOffice\PhpSpreadsheet\NamedRange('penerima', $spreadsheet->getActiveSheet(), 'E24'));
+
+$spreadsheet->getActiveSheet()->mergeCells('E25:F25');
+$spreadsheet->getActiveSheet()->setCellValue('E25', 'Bendahara');
+$spreadsheet->addNamedRange(new \PhpOffice\PhpSpreadsheet\NamedRange('jabatan', $spreadsheet->getActiveSheet(), 'E25'));
 
 
 
 // SET BACKGROUND
 // $spreadsheet->getActiveSheet()->getStyle('A8:F11')
 // ->getFill()->getStartColor()->setARGB('FFFF0000');
-$spreadsheet->getActiveSheet()->mergeCells('A26:F28');
-$spreadsheet->getActiveSheet()->getStyle('A26:F28')
+$spreadsheet->getActiveSheet()->mergeCells('A27:F29');
+$spreadsheet->getActiveSheet()->getStyle('A27:F29')
   ->getAlignment()->setWrapText(true);
-$spreadsheet->getActiveSheet()->getStyle('A26:F28')
+$spreadsheet->getActiveSheet()->getStyle('A27:F29')
   ->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_TOP);
 $richText = new \PhpOffice\PhpSpreadsheet\RichText\RichText();
 $richText->createText('* Sesuai dengan ketentuan peraturan perundang-undangan yang berlaku,  ');
@@ -309,7 +275,7 @@ $payable->getFont()->setBold(true);
 $payable->getFont()->setItalic(true);
 $payable->getFont()->setColor(new \PhpOffice\PhpSpreadsheet\Style\Color(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_DARKGREEN));
 $richText->createText(', sehingga tidak diperlukan tandatangan dengan stempel basah.');
-$spreadsheet->getActiveSheet()->getCell('A26')->setValue($richText);
+$spreadsheet->getActiveSheet()->getCell('A27')->setValue($richText);
 
 // SET PAGE PRINT
 $spreadsheet->getActiveSheet()->getPageSetup()->setFitToWidth(1);
@@ -332,8 +298,8 @@ $spreadsheet->getActiveSheet()->getPageSetup()
 // $spreadsheet->getActiveSheet()->getHeaderFooter()
 //   ->setOddHeader('&C&HPlease treat this document as confidential!');
 $spreadsheet->getActiveSheet()->getHeaderFooter()
-  // ->setOddFooter('&L&B' . $spreadsheet->getProperties()->getTitle() . '&RPage &P of &N'); //ok
-  ->setOddFooter('&L&B' . $spreadsheet->getProperties()->getDescription() . '&RPage &P of &N');
+  ->setOddFooter('&L&B' . $spreadsheet->getProperties()->getTitle() . '&RPage &P of &N'); //ok
+// ->setOddFooter('&L&B' . $spreadsheet->getProperties()->getDescription() . '&RPage &P of &N');
 
 /* Here there will be some code where you create $spreadsheet */
 $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
